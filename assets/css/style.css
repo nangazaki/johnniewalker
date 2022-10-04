@@ -115,7 +115,7 @@ p {
   z-index: 999;
   position: absolute;
   padding: 12px 70px;
-  font: 500 16px "Poppins";
+  font: 500 16px 'Poppins';
   border: none;
   color: #222;
   background: #d6a322;
@@ -239,7 +239,7 @@ footer {
     z-index: 999;
     position: absolute;
     padding: 12px 70px;
-    font: 16px "Poppins-Medium";
+    font: 500 16px 'Poppins';
     border: none;
     color: #222;
     background: #d6a322;
