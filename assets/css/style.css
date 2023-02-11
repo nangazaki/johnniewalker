@@ -2,52 +2,111 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Rubik', sans-serif;
   color: #f2f2f2;
-}
-
-body {
-  width: 100%;
-  height: 100vh;
-  overflow-y: hidden;
-  background: linear-gradient(
-    252.44deg,
-    #292929 50%,
-    rgba(34, 34, 34, 0.8) 100%
-  );
-}
-
-.container {
-  width: 100%;
-  height: 100vh;
-  overflow-y: hidden;
-  background: linear-gradient(
-    159.66deg,
-    rgba(15, 15, 15, 0.884) 27.04%,
-    #030303 74.62%
-  );
-  z-index: 50;
-}
-
-.content-main {
-  mix-blend-mode: normal;
-  z-index: 999;
 }
 
 a {
   text-decoration: none;
 }
+
 li {
   list-style: none;
 }
 
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: #080808;
+}
+
+.bg {
+  background-image: url('../img/bg.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+@keyframes enter-text {
+  from {
+    opacity: 0;
+    transform: translate3d(-50px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes enter-img {
+  0% {
+    opacity: 0;
+    transform: translate3d(100px, 0, 100px);
+    transform: rotate(20deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate3d(-50px, 20px, 0);
+    transform: rotate(-5deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes link {
+  0% {
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    right: 50%;
+    border-radius: 50%;
+  }
+
+  100% {
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+  }
+}
+
+.indicator {
+  position: absolute;
+  top: 170px;
+  left: 80px;
+  animation: enter-text 3s;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  width: 100%;
+  height: calc(100vh - 80px);
+  overflow: hidden;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 header {
+  max-width: 1120px;
   height: 60px;
   width: 100%;
-  padding: 0 120px;
+  margin: 10px auto;
+  padding: 0 24px;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 }
 
 .menu-mobile {
@@ -61,36 +120,44 @@ header {
 .menu-mobile span {
   display: block;
   width: 100%;
-  height: 3px;
+  height: 2px;
   background: #f2f2f2;
   border-radius: 5px;
   margin-bottom: 6px;
 }
 
 .menu-mobile .line-2 {
-  width: 70%;
+  width: 50%;
 }
 
 .menu-mobile .line-3 {
+  width: 70%;
   margin-bottom: 0;
 }
 
-nav {
-  display: flex;
-  gap: 32px;
-}
-
-ul {
+nav, ul {
   display: flex;
   gap: 32px;
 }
 
 li > a {
-  font-size: 18px;
+  font-size: 1.125em;
+  padding-left: 8px;
+  position: relative;
 }
-li > a:hover {
-  transition: 1s;
-  color: #d6a322;
+
+li a:hover::after {
+  z-index: -10;
+  content: '';
+  display: block;
+  position: absolute;
+  background-color: #d6a322;
+  height: 40%;
+  width: 70%;
+  border-radius: 4px;
+  left: 0;
+  bottom: 0;
+  transition: 9s ease-in;
 }
 
 .icons {
@@ -100,22 +167,25 @@ li > a:hover {
 
 h1 {
   text-transform: uppercase;
-  font: 600 72px "Poppins";
-  line-height: calc(72px * 1.1);
+  font: 500 4rem 'Rubik';
+  line-height: 110%;
   color: #d6a322;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 p {
-  line-height: calc(16px * 1.5);
-  margin-bottom: 24px;
+  font-family: 'IBM Plex Sans';
+  line-height: 150%;
+  font-size: 1.125rem;
+  color: #f2f2f2;
+  margin-bottom: 2rem;
 }
 
 .button {
-  z-index: 999;
+  z-index: 10;
   position: absolute;
   padding: 12px 70px;
-  font: 500 16px 'Poppins';
+  font: 500 16px 'Rubik';
   border: none;
   color: #222;
   background: #d6a322;
@@ -140,44 +210,49 @@ p {
   transform: translate(6px, 6px);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 120px auto 120px;
-}
-
 .content {
-  grid-column: 2/3;
+  width: 90%;
+  height: 100%;
+
   display: flex;
-  gap: 200px;
   align-items: center;
+  justify-content: space-between;
 }
 
 .content-text {
+  height: auto;
   max-width: 600px;
+  animation: enter-text 3s;
 }
 
-.img-whisky {
-  transform: rotate(-20deg);
-  filter: drop-shadow(50px 100px 200px #111111);
+.content-img {
+  max-width: 300px;
+  height: 95%;
+  animation: enter-img 3s;
+}
+
+.content-img img {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-10deg);
 }
 
 footer {
   display: none;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 825px) {
   body {
     height: auto;
     overflow-y: scroll;
   }
-
+  
   .container {
     height: auto;
   }
 
-  header {
-    padding: 0 32px;
-    margin-bottom: 84px;
+  .indicator {
+    left: 40px;
   }
 
   .menu-mobile {
@@ -185,79 +260,49 @@ footer {
   }
 
   .logo img {
-    width: 200px;
+    width: 180px;
   }
 
-  nav ul {
+  nav ul, nav .search {
     display: none;
-  }
-
-  nav .icons {
-    display: block;
-  }
-
-  nav .search {
-    display: none;
-  }
-
-  mmain {
-    margin-bottom: 84px;
-  }
-
-  .grid {
-    grid-template-columns: 32px auto 32px;
   }
 
   .content {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 56px;
-  }
-
-  .content-text {
-    order: 2;
-    margin-bottom: 84px;
-  }
-
-  .content-img {
-    order: 1;
+    margin-bottom: 100px;
   }
 
   h1 {
     text-transform: uppercase;
-    font: 600 40px "Poppins";
-    line-height: calc(40px * 1.2);
+    font: 600 2.5rem "Rubik";
+    line-height: 120%;
     color: #d6a322;
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
   }
 
-  p {
-    line-height: calc(16px * 1.5);
-    margin-bottom: 24px;
-  }
-
-  .button {
-    z-index: 999;
-    position: absolute;
-    padding: 12px 70px;
-    font: 500 16px 'Poppins';
-    border: none;
-    color: #222;
-    background: #d6a322;
-    cursor: pointer;
-    transition: 0.5s ease;
-  }
-
-  .img-whisky {
+  .content-img img {
     width: 150px;
   }
 
   footer {
-    color: rgb(163, 163, 163);
     height: 120px;
+    color: #f2f2f2;
+    margin-top: 2rem;
+    border-top: 1px solid #333;
+    
     display: flex;
-    justify-content: center;
     align-items: center;
-    border-top: 1px solid rgb(163, 163, 163);
-    margin-top: 32px;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  footer > p {
+    margin: 0;
+  }
+
+  footer a {
+    color: #ffe297;
+
   }
 }
